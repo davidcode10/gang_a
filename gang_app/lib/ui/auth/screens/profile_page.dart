@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gang_app/controller/auth_controller.dart';
-import 'package:gang_app/pages/edit_profile_page.dart';
 import 'package:gang_app/theme/color_theme.dart';
 import 'package:gang_app/theme/text_theme.dart';
+import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/auth/screens/edit_profile_page.dart';
 import 'package:get/get.dart';
 
 class ProfilePage extends StatelessWidget {

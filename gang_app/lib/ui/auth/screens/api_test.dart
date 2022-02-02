@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gang_app/controller/api_controller.dart';
-import 'package:gang_app/controller/product_controller.dart';
-import 'package:gang_app/pages/details_page.dart';
+import 'package:gang_app/ui/auth/controller/api_controller.dart';
+import 'package:gang_app/ui/auth/controller/product_controller.dart';
+import 'package:gang_app/ui/auth/screens/details_page.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

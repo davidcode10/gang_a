@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gang_app/pages/login_register.dart';
+import 'package:gang_app/ui/auth/screens/login_register.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class Intro extends StatelessWidget {

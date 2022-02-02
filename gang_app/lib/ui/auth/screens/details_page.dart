@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:gang_app/controller/product_controller.dart';
 import 'package:gang_app/model/beer_model.dart';
 import 'package:gang_app/theme/color_theme.dart';
 import 'package:gang_app/theme/text_theme.dart';
+import 'package:gang_app/ui/auth/controller/product_controller.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

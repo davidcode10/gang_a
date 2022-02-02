@@ -1,6 +1,6 @@
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:gang_app/controller/auth_controller.dart';
-import 'package:gang_app/pages/home_page.dart';
+import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/auth/screens/home_page.dart';
 import 'package:gang_app/utils/form_validators.dart';
 import 'package:gang_app/widgets/global_textfield.dart';
 import 'package:get/get.dart';

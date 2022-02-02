@@ -1,10 +1,10 @@
-import 'package:gang_app/controller/auth_controller.dart';
-import 'package:gang_app/controller/product_controller.dart';
-import 'package:gang_app/pages/api_test.dart';
-import 'package:gang_app/pages/favorite_beer.dart';
-import 'package:gang_app/pages/profile_page.dart';
 import 'package:gang_app/theme/color_theme.dart';
 import 'package:gang_app/theme/text_theme.dart';
+import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/auth/controller/product_controller.dart';
+import 'package:gang_app/ui/auth/screens/api_test.dart';
+import 'package:gang_app/ui/auth/screens/favorite_beer.dart';
+import 'package:gang_app/ui/auth/screens/profile_page.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

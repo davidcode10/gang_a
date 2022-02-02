@@ -29,6 +29,7 @@ class AppColors {
   });
 
   // Additional
+  static const Color darkGreen = Color(0xFF394141);
   static const Color redError = Color(0xFFFE5C36);
   static const Color orange = Color(0xFFFFB449);
   static const Color blue = Color(0xFF54AFBC);

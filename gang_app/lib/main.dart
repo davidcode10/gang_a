@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gang_app/controller/auth_controller.dart';
-import 'package:gang_app/pages/home_page.dart';
-import 'package:gang_app/pages/loading_page.dart';
-import 'package:gang_app/pages/login.dart';
 import 'package:gang_app/theme/app_theme.dart';
+import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/auth/screens/loading_page.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:gang_app/controller/auth_controller.dart';
 import 'package:gang_app/model/user_model.dart';
 import 'package:gang_app/theme/color_theme.dart';
+import 'package:gang_app/ui/auth/controller/auth_controller.dart';
 import 'package:gang_app/utils/form_validators.dart';
 import 'package:gang_app/widgets/global_textfield.dart';
 import 'package:get/get.dart';

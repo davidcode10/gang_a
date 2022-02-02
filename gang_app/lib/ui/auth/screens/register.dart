@@ -1,7 +1,7 @@
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:gang_app/controller/auth_controller.dart';
-import 'package:gang_app/pages/terms_page.dart';
+import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/auth/screens/terms_page.dart';
 import 'package:gang_app/utils/form_validators.dart';
 import 'package:gang_app/widgets/checkbox_global.dart';
 import 'package:gang_app/widgets/global_textfield.dart';

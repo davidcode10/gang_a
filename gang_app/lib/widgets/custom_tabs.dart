@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gang_app/pages/login.dart';
-import 'package:gang_app/pages/register.dart';
+import 'package:gang_app/ui/auth/screens/login.dart';
+import 'package:gang_app/ui/auth/screens/register.dart';
 
 class CustomTabs extends StatelessWidget {
   const CustomTabs({Key? key}) : super(key: key);
