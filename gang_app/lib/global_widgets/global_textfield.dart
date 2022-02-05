@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GlobalTextField extends StatelessWidget {
-  const GlobalTextField(
+  GlobalTextField(
       {Key? key,
       required this.obscureText,
       required this.hintText,
@@ -9,6 +10,7 @@ class GlobalTextField extends StatelessWidget {
       this.onSave,
       this.onChange,
       this.validator,
+      this.inputFormaters,
       required this.keyboardType,
       this.controller,
       required this.maxLines,
@@ -25,6 +27,7 @@ class GlobalTextField extends StatelessWidget {
   final TextEditingController? controller;
   final int maxLines;
   final int minLines;
+  final List<TextInputFormatter>? inputFormaters;
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +35,11 @@ class GlobalTextField extends StatelessWidget {
       obscureText: obscureText,
       cursorColor: Colors.black,
       keyboardType: keyboardType,
+      inputFormatters: inputFormaters,
       maxLines: maxLines,
       minLines: minLines,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
-
-        // IconButton(
-        //   icon: Icon(Icons.remove_red_eye_outlined),
-        //   color: Colors.black,
-        //   onPressed: () {},
-        // ),
         fillColor: Colors.white,
         filled: true,
         hintText: hintText,

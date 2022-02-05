@@ -2,6 +2,7 @@ import 'package:gang_app/ui/auth/screens/intro_screen.dart';
 import 'package:gang_app/ui/auth/screens/loading_page.dart';
 import 'package:gang_app/ui/home/bindings/nav_binding.dart';
 import 'package:gang_app/ui/home/screens/home_screen.dart';
+import 'package:gang_app/ui/products/bindings/product_binging.dart';
 import 'package:gang_app/ui/products/pages/product_form.dart';
 import 'package:get/route_manager.dart';
 
@@ -30,6 +31,7 @@ class AppPages {
     GetPage(
       name: Routes.PRODUCTFORM,
       page: () => ProductForm(),
+      binding: ProductBinding(),
     ),
   ];
 }

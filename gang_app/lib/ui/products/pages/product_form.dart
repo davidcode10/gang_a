@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gang_app/global_widgets/global_textfield.dart';
-import 'package:gang_app/model/product_model.dart';
+import 'package:gang_app/global_widgets/show_alert_dialog.dart';
 import 'package:gang_app/theme/color_theme.dart';
 import 'package:gang_app/ui/products/controllers/product_controller.dart';
+import 'package:gang_app/ui/utils/form_validator.dart';
 import 'package:get/get.dart';
 
 class ProductForm extends StatelessWidget {
@@ -47,6 +49,7 @@ class ProductForm extends StatelessWidget {
                     obscureText: false,
                     hintText: "Introduce el nombre del producto",
                     keyboardType: TextInputType.emailAddress,
+                    validator: FormValidator().isValidName,
                     maxLines: 1,
                     minLines: 1,
                     onSave: (value) {
@@ -61,10 +64,57 @@ class ProductForm extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   width: double.infinity,
                   child: GlobalTextField(
+                    controller: productController.originalPrice,
+                    obscureText: false,
+                    hintText: "Introduce precio original en euros",
+                    keyboardType: TextInputType.number,
+                    validator: FormValidator().isValidPrice,
+                    maxLines: 1,
+                    minLines: 1,
+                    onSave: (value) {
+                      productController.nameProduct.text = value!;
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  width: double.infinity,
+                  child: GlobalTextField(
+                    controller: productController.realPrice,
+                    obscureText: false,
+                    hintText: "Introduce precio de la Ganga en euros",
+                    keyboardType: TextInputType.number,
+                    validator: FormValidator().isValidPrice,
+                    inputFormaters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'))
+                    ],
+                    maxLines: 1,
+                    minLines: 1,
+                    onSave: (value) {
+                      productController.realPrice.text = value!;
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  width: double.infinity,
+                  child: GlobalTextField(
                     controller: productController.descriptionProduct,
                     obscureText: false,
-                    hintText: "Introduce el nombre del producto",
+                    hintText: "Introduce la descripción del producto",
+                    validator: FormValidator().isValidDescription,
                     keyboardType: TextInputType.multiline,
+                    inputFormaters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'))
+                    ],
                     maxLines: 20,
                     minLines: 5,
                     onSave: (value) {
@@ -97,15 +147,23 @@ class ProductForm extends StatelessWidget {
                             color: Colors.white),
                       ),
                       onPressed: () async {
-                        ProductModel newProduct = ProductModel(
-                          uid: "",
-                          name: "name",
-                          description: "description",
-                          originalPrice: "originalPrice",
-                          realPrice: "realPrice",
-                        );
+                        //print(double.parse(productController.realPrice.text));
+                        if (_formKey.currentState!.validate()) {
+                          // ProductModel newProduct = ProductModel(
+                          //   uid: "",
+                          //   name: productController.nameProduct.text,
+                          //   description:
+                          //       productController.descriptionProduct.text,
+                          //   originalPrice:
+                          //       productController.originalPrice.text + "€",
+                          //   realPrice: productController.realPrice.text + "€",
+                          // );
 
-                        productController.createProduct(newProduct);
+                          // productController.createProduct(newProduct);
+                        } else {
+                          showAlertDialog(
+                              context, "Error", "Rellene todos los campos");
+                        }
                       }),
                 ),
               ),

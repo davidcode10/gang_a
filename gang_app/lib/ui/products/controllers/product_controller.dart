@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gang_app/model/product_model.dart';
 import 'package:gang_app/services/firestore/firestore_service_products.dart';
+import 'package:get/get.dart';
 
-class ProductController {
+class ProductController extends GetxController {
   TextEditingController nameProduct = TextEditingController();
   TextEditingController originalPrice = TextEditingController();
   TextEditingController realPrice = TextEditingController();
