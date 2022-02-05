@@ -4,8 +4,8 @@ import 'package:gang_app/services/firestore/firestore_services.dart';
 
 class DatabaseUsers {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  static const String _collection = "users";
-  static final FirestoreService _service = FirestoreService(_collection);
+  static String _collection = "users";
+  static FirestoreService _service = FirestoreService(_collection);
 
   Future<bool> createNewUser(UserModel user) async {
     try {

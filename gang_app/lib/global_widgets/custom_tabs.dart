@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gang_app/ui/auth/screens/login.dart';
-import 'package:gang_app/ui/auth/screens/register.dart';
+import 'package:gang_app/ui/auth/screens/login_screen.dart';
+import 'package:gang_app/ui/auth/screens/register_screen.dart';
 
 class CustomTabs extends StatelessWidget {
   const CustomTabs({Key? key}) : super(key: key);
@@ -29,6 +29,6 @@ class CustomTabs extends StatelessWidget {
                                   fontSize: 22,
                                   fontWeight: FontWeight.w600)))
                     ])),
-            body: TabBarView(children: [Login(), Registrar()])));
+            body: TabBarView(children: [LoginScreen(), RegisterScreen()])));
   }
 }

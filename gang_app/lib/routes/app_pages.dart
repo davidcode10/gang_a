@@ -1,6 +1,8 @@
-import 'package:gang_app/ui/auth/screens/home_page.dart';
-import 'package:gang_app/ui/auth/screens/intro_page.dart';
+import 'package:gang_app/ui/auth/screens/intro_screen.dart';
 import 'package:gang_app/ui/auth/screens/loading_page.dart';
+import 'package:gang_app/ui/home/bindings/nav_binding.dart';
+import 'package:gang_app/ui/home/screens/home_screen.dart';
+import 'package:gang_app/ui/products/pages/product_form.dart';
 import 'package:get/route_manager.dart';
 
 part 'app_routes.dart';
@@ -12,15 +14,22 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.LOADING,
-      page: () => LoadingPage(),
+      page: () => LoadingScreen(),
     ),
     GetPage(
       name: Routes.HOME,
-      page: () => Home(),
+      page: () => HomeScreen(),
+      bindings: [
+        NavBinding(),
+      ],
     ),
     GetPage(
       name: Routes.INTRO,
-      page: () => Intro(),
+      page: () => IntroScreen(),
+    ),
+    GetPage(
+      name: Routes.PRODUCTFORM,
+      page: () => ProductForm(),
     ),
   ];
 }

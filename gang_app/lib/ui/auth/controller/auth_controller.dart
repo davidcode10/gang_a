@@ -1,14 +1,14 @@
 import 'dart:developer';
+import 'package:gang_app/global_widgets/show_alert_dialog.dart';
+import 'package:gang_app/model/user_model.dart';
+import 'package:gang_app/routes/app_pages.dart';
+import 'package:gang_app/services/firestore/firestore_service_user.dart';
+import 'package:gang_app/ui/auth/screens/login_register_screen.dart';
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:gang_app/model/user_model.dart';
-import 'package:gang_app/services/firestore/firestore_service_user.dart';
-import 'package:gang_app/ui/auth/screens/home_page.dart';
-import 'package:gang_app/ui/auth/screens/intro_page.dart';
-import 'package:gang_app/widgets/show_alert_dialog.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
@@ -25,11 +25,6 @@ class AuthController extends GetxController {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Rxn<User> firebaseUser = Rxn<User>();
   Rxn<UserModel> firestoreUser = Rxn<UserModel>();
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   @override
   void onClose() {
@@ -61,9 +56,9 @@ class AuthController extends GetxController {
     }
 
     if (_firebaseUser == null) {
-      Get.offAll(Intro());
+      Get.offAll(LoginRegisterScreen());
     } else {
-      Get.offAll(Home());
+      Get.offAllNamed(Routes.HOME);
     }
   }
 
@@ -79,7 +74,6 @@ class AuthController extends GetxController {
         .doc('users/${firebaseUser.value!.uid}')
         .snapshots()
         .map((snapshot) {
-      print(snapshot.data() as Map<String, dynamic>);
       return UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
     });
   }
@@ -87,7 +81,6 @@ class AuthController extends GetxController {
   Future<User> signInAnonymous() async {
     UserCredential result = await _auth.signInAnonymously();
 
-    print(result.user!.isAnonymous);
     return result.user!;
   }
 
@@ -108,36 +101,40 @@ class AuthController extends GetxController {
         password: passController.text,
       )
           .then((result) async {
-        print("UID: " + result.user!.uid.toString());
-        print("email: " + result.user!.email.toString());
-
         UserModel _newUser = UserModel(
           uid: result.user!.uid,
           email: result.user!.email,
           name: "user",
-          photoUrl: "https://picsum.photos/250?image=9",
+          photoUrl: "/assets/image/profile_image.png",
         );
         DatabaseUsers().createNewUser(_newUser);
-        Get.to(Home());
       });
     } on FirebaseAuthException catch (error) {
-      print(error.message);
       showAlertDialog(context, "Error", "${error.message}");
     }
   }
 
   signInWithEmailAndPassword() async {
     try {
-      print(emailController.text.trim());
-      print(passController.text.trim());
       await _auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passController.text.trim(),
       );
       emailController.clear();
       passController.clear();
-      Get.to(Home());
+      Get.snackbar(
+        "Your data is correct",
+        "Wellcome",
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } catch (err) {
+      Get.snackbar(
+        "Error",
+        "Your data is incorrect",
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+      );
       print(err);
     }
   }
@@ -167,8 +164,6 @@ class AuthController extends GetxController {
       _firebaseMessaging.getToken().then((token) {
         saveTokens(token);
       });
-
-      Get.to(Home());
 
       return result.user;
     }

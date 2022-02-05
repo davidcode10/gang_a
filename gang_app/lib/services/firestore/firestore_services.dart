@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 const app_users_collection = "usersGetx";
 
 class FirestoreService<T> {
-  final String _logName = "Firestore service";
+  String _logName = "Firestore service";
 
   final String collection;
 

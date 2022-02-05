@@ -1,22 +1,19 @@
-import 'package:flutter_signin_button/button_view.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:gang_app/ui/auth/controller/auth_controller.dart';
-import 'package:gang_app/ui/auth/screens/terms_page.dart';
-import 'package:gang_app/utils/form_validators.dart';
-import 'package:gang_app/widgets/checkbox_global.dart';
-import 'package:gang_app/widgets/global_textfield.dart';
-import 'package:gang_app/widgets/show_alert_dialog.dart';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:gang_app/global_widgets/checkbox_global.dart';
+import 'package:gang_app/global_widgets/global_textfield.dart';
+import 'package:gang_app/global_widgets/show_alert_dialog.dart';
+import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/utils/form_validator.dart';
+import 'package:get/get.dart';
 
-class Registrar extends StatelessWidget {
-  Registrar({Key? key}) : super(key: key);
-
+class RegisterScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // AuthController authController = AuthController();
     return GetBuilder<AuthController>(
       builder: (authController) => Scaffold(
         backgroundColor: Colors.white,
@@ -54,24 +51,6 @@ class Registrar extends StatelessWidget {
                               authController.emailController.text = value!;
                             },
                           ),
-                          // TextFormField(
-                          //   keyboardType: TextInputType.emailAddress,
-                          //   cursorColor: Colors.black,
-                          //   decoration: InputDecoration(
-                          //     fillColor: Colors.white,
-                          //     filled: true,
-                          //     hintText: 'beer@ejemplo.com',
-                          //     hintStyle: const TextStyle(
-                          //         fontSize: 14, color: Colors.black),
-                          //     focusedBorder: const OutlineInputBorder(
-                          //         borderSide: BorderSide(color: Colors.black)),
-                          //     border: OutlineInputBorder(
-                          //         borderRadius: BorderRadius.circular(5)),
-                          //   ),
-                          //   onChanged: (content) {
-                          //     c.controllerCorreo(content);
-                          //   },
-                          // ),
                         ),
                         const SizedBox(height: 25),
                         Container(
@@ -100,7 +79,7 @@ class Registrar extends StatelessWidget {
                               ),
                               obscureText: authController.obscureTextPass.value,
                               hintText: "Tu contraseña",
-                              validator: FormValidator().isValidPassword,
+                              validator: FormValidator().isValidPass,
                               keyboardType: TextInputType.text,
                               controller: authController.passController,
                               maxLines: 1,
@@ -114,63 +93,32 @@ class Registrar extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.only(left: 30, right: 30),
                           width: double.infinity,
-                          child: Obx(() => GlobalTextField(
-                                validator: FormValidator().isValidPassword,
-                                controller:
-                                    authController.passConfirmController,
-                                obscureText:
-                                    authController.obscureTextPass.value,
-                                hintText: "Repite tuu contraseña",
-                                keyboardType: TextInputType.text,
-                                maxLines: 1,
-                                minLines: 1,
-                                suffixIcon: IconButton(
-                                    icon: Icon(
-                                        authController.obscureTextPass.value ==
-                                                true
-                                            ? Icons.remove_red_eye
-                                            : Icons.remove_red_eye_outlined),
-                                    color: Colors.black,
-                                    onPressed: () {
-                                      authController.obscureTextPass.value =
-                                          !authController.obscureTextPass.value;
-                                    }),
-                                onSave: (value) {
-                                  authController.passConfirmController.text =
-                                      value!;
-                                },
-                              )),
-
-                          // Obx(
-                          //   () => TextFormField(
-                          //     obscureText:
-                          //         c.contrasenaEye.value == "true" ? true : false,
-                          //     cursorColor: Colors.black,
-                          //     decoration: InputDecoration(
-                          //       suffixIcon: IconButton(
-                          //         icon: Icon(c.contrasenaEye.value == "true"
-                          //             ? Icons.remove_red_eye
-                          //             : Icons.remove_red_eye_outlined),
-                          //         color: Colors.black,
-                          //         onPressed: () {
-                          //           c.controllerEye();
-                          //         },
-                          //       ),
-                          //       fillColor: Colors.white,
-                          //       filled: true,
-                          //       hintText: 'Tu contraseña',
-                          //       hintStyle: const TextStyle(
-                          //           fontSize: 14, color: Colors.black),
-                          //       focusedBorder: const OutlineInputBorder(
-                          //           borderSide: BorderSide(color: Colors.black)),
-                          //       border: OutlineInputBorder(
-                          //           borderRadius: BorderRadius.circular(5)),
-                          //     ),
-                          //     onChanged: (content) {
-                          //       c.controllerContrasena(content);
-                          //     },
-                          //   ),
-                          // ),
+                          child: Obx(
+                            () => GlobalTextField(
+                              validator: FormValidator().isValidPass,
+                              controller: authController.passConfirmController,
+                              obscureText: authController.obscureTextPass.value,
+                              hintText: "Repite tuu contraseña",
+                              keyboardType: TextInputType.text,
+                              maxLines: 1,
+                              minLines: 1,
+                              suffixIcon: IconButton(
+                                  icon: Icon(
+                                      authController.obscureTextPass.value ==
+                                              true
+                                          ? Icons.remove_red_eye
+                                          : Icons.remove_red_eye_outlined),
+                                  color: Colors.black,
+                                  onPressed: () {
+                                    authController.obscureTextPass.value =
+                                        !authController.obscureTextPass.value;
+                                  }),
+                              onSave: (value) {
+                                authController.passConfirmController.text =
+                                    value!;
+                              },
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 22),
                         Container(
@@ -185,37 +133,26 @@ class Registrar extends StatelessWidget {
                                           !authController.checkboxValue.value;
                                     })),
                                 const SizedBox(width: 5),
-
                                 InkWell(
                                   onTap: () {
                                     authController.checkboxValue.value =
                                         !authController.checkboxValue.value;
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     "He Leído y accepto las ",
                                     style: TextStyle(fontSize: 13),
                                   ),
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Get.to(TermCondition());
+                                    //TODO: Term Conditions
+                                    //Get.to(TermCondition());
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     "condiciones de uso.",
-                                    style: const TextStyle(color: Color(0xFF54AFBC)),
+                                    style: TextStyle(color: Color(0xFF54AFBC)),
                                   ),
                                 )
-                                // SizedBox(
-                                //     height: 25,
-                                //     width: 30,
-                                //     child: Obx(() => Checkbox(
-                                //         checkColor: Colors.white,
-                                //         fillColor: MaterialStateProperty.all(
-                                //             Colors.black),
-                                //         value: c.checkBox.value,
-                                //         onChanged: (content) {
-                                //           c.controllerCheckBox(content);
-                                //         }))),
                               ],
                             )),
                         const SizedBox(height: 46),
@@ -249,7 +186,7 @@ class Registrar extends StatelessWidget {
                                       ),
                                     ),
                                     backgroundColor: MaterialStateProperty.all(
-                                        const Color(0xFF8FD974))),
+                                        const Color(0xFFFFB449))),
                                 child: const Text("CREAR CUENTA",
                                     style: TextStyle(
                                         fontSize: 22,
@@ -270,15 +207,6 @@ class Registrar extends StatelessWidget {
                                       .validate()) {
                                     await authController
                                         .registerWithEmailAndPassword(context);
-                                    // Get.to(Home());
-                                    // ScaffoldMessenger.of(context)
-                                    //     .showSnackBar(
-                                    //   SnackBar(
-                                    //     duration: Duration(seconds: 3),
-                                    //     content: Text(
-                                    //         'Recibiras un email de confirmación, luego podrás realizar el Login'),
-                                    //   ),
-                                    // );
                                   }
                                 }),
                           ),
@@ -290,13 +218,6 @@ class Registrar extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget btnText(String text, headline1) {
-    return Text(
-      text,
-      style: headline1,
     );
   }
 }
