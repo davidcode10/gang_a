@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gang_app/global_widgets/global_textfield.dart';
 import 'package:gang_app/global_widgets/show_alert_dialog.dart';
+import 'package:gang_app/model/product_model.dart';
 import 'package:gang_app/theme/color_theme.dart';
 import 'package:gang_app/ui/products/controllers/product_controller.dart';
 import 'package:gang_app/ui/utils/form_validator.dart';
@@ -149,17 +150,17 @@ class ProductForm extends StatelessWidget {
                       onPressed: () async {
                         //print(double.parse(productController.realPrice.text));
                         if (_formKey.currentState!.validate()) {
-                          // ProductModel newProduct = ProductModel(
-                          //   uid: "",
-                          //   name: productController.nameProduct.text,
-                          //   description:
-                          //       productController.descriptionProduct.text,
-                          //   originalPrice:
-                          //       productController.originalPrice.text + "€",
-                          //   realPrice: productController.realPrice.text + "€",
-                          // );
+                          ProductModel newProduct = ProductModel(
+                            uid: "",
+                            name: productController.nameProduct.text,
+                            description:
+                                productController.descriptionProduct.text,
+                            originalPrice:
+                                productController.originalPrice.text + "€",
+                            realPrice: productController.realPrice.text + "€",
+                          );
 
-                          // productController.createProduct(newProduct);
+                          productController.createProduct(newProduct);
                         } else {
                           showAlertDialog(
                               context, "Error", "Rellene todos los campos");
