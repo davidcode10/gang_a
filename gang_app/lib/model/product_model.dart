@@ -8,14 +8,15 @@ class ProductModel {
   final String? description;
   final String? originalPrice;
   final String? realPrice;
+  final String? photoUrl;
 
-  ProductModel({
-    required this.uid,
-    required this.name,
-    required this.description,
-    required this.originalPrice,
-    required this.realPrice,
-  });
+  ProductModel(
+      {this.uid,
+      this.name,
+      this.description,
+      this.originalPrice,
+      this.realPrice,
+      this.photoUrl});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

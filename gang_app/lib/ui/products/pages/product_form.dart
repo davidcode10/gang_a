@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gang_app/global_widgets/global_textfield.dart';
-import 'package:gang_app/global_widgets/show_alert_dialog.dart';
-import 'package:gang_app/model/product_model.dart';
 import 'package:gang_app/theme/color_theme.dart';
 import 'package:gang_app/ui/products/controllers/product_controller.dart';
 import 'package:gang_app/ui/utils/form_validator.dart';
@@ -13,7 +11,7 @@ class ProductForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    ProductController productController = ProductController();
+    ProductController productController = Get.find();
 
     return Scaffold(
       body: Form(
@@ -21,6 +19,34 @@ class ProductForm extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Container(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: TextButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.blue[200])),
+                    child: const Text(
+                      "EDITAR FOTO",
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      // GetImage().showPicker(context);
+                    },
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 40, left: 30),
                 child: Row(
@@ -124,6 +150,31 @@ class ProductForm extends StatelessWidget {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Obx(
+                  () => DropdownButton<String>(
+                    value: productController.dropdownValue.value,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    onChanged: (String? newValue) {
+                      productController.dropdownValue.value = newValue!;
+                    },
+                    items: productController.categoryProducts
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
               Container(
                 padding: const EdgeInsets.only(
                     left: 30, right: 30, bottom: 40, top: 40),
@@ -148,23 +199,25 @@ class ProductForm extends StatelessWidget {
                             color: Colors.white),
                       ),
                       onPressed: () async {
-                        //print(double.parse(productController.realPrice.text));
-                        if (_formKey.currentState!.validate()) {
-                          ProductModel newProduct = ProductModel(
-                            uid: "",
-                            name: productController.nameProduct.text,
-                            description:
-                                productController.descriptionProduct.text,
-                            originalPrice:
-                                productController.originalPrice.text + "€",
-                            realPrice: productController.realPrice.text + "€",
-                          );
+                        print(productController.dropdownValue.value);
 
-                          productController.createProduct(newProduct);
-                        } else {
-                          showAlertDialog(
-                              context, "Error", "Rellene todos los campos");
-                        }
+                        //print(double.parse(productController.realPrice.text));
+                        // if (_formKey.currentState!.validate()) {
+                        //   // ProductModel newProduct = ProductModel(
+                        //   //   uid: "",
+                        //   //   name: productController.nameProduct.text,
+                        //   //   description:
+                        //   //       productController.descriptionProduct.text,
+                        //   //   originalPrice:
+                        //   //       productController.originalPrice.text + "€",
+                        //   //   realPrice: productController.realPrice.text + "€",
+                        //   // );
+
+                        //   // productController.createProduct(newProduct);
+                        // } else {
+                        //   showAlertDialog(
+                        //       context, "Error", "Rellene todos los campos");
+                        // }
                       }),
                 ),
               ),

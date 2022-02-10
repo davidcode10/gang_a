@@ -12,6 +12,7 @@ ProductModel _$ProductModelFromJson(Map json) => ProductModel(
       description: json['description'] as String?,
       originalPrice: json['originalPrice'] as String?,
       realPrice: json['realPrice'] as String?,
+      photoUrl: json['photoUrl'] as String?,
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'description': instance.description,
       'originalPrice': instance.originalPrice,
       'realPrice': instance.realPrice,
+      'photoUrl': instance.photoUrl,
     };

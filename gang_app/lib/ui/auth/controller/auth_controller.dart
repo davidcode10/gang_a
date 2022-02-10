@@ -26,6 +26,9 @@ class AuthController extends GetxController {
   Rxn<User> firebaseUser = Rxn<User>();
   Rxn<UserModel> firestoreUser = Rxn<UserModel>();
 
+  var urlImageUser = ''.obs;
+  var pathImageUser = ''.obs;
+
   @override
   void onClose() {
     emailController.dispose();
@@ -105,7 +108,7 @@ class AuthController extends GetxController {
           uid: result.user!.uid,
           email: result.user!.email,
           name: "user",
-          photoUrl: "/assets/image/profile_image.png",
+          photoUrl: "https://picsum.photos/250?image=9",
         );
         DatabaseUsers().createNewUser(_newUser);
       });

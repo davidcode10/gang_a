@@ -13,4 +13,6 @@ class ProductController extends GetxController {
   Future<bool> createProduct(ProductModel product) async {
     return dataBaseProducts.createNewProduct(product);
   }
+  var dropdownValue = 'One'.obs;
+  List<String> categoryProducts = ['Clothes', 'Jacket', 'Cars', 'Phones'];
 }
