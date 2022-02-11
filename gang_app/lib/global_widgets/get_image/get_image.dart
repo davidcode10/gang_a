@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gang_app/model/product_model.dart';
 import 'package:gang_app/model/user_model.dart';
 import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/products/controllers/product_controller.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -11,27 +12,27 @@ class GetImage {
   late String urlGetImage;
   late String pathImage;
   final AuthController authController = Get.find();
+  final ProductController productController = Get.find();
   final picker = ImagePicker();
 
-  Future uploadFileProduct(BuildContext context, File imageProfile) async {
-    firebase_storage.Reference storageReference =
-        firebase_storage.FirebaseStorage.instance.ref().child('productuid');
+  Future uploadFileProduct(BuildContext context, File imageProfile,
+      String productUid, ProductModel updateProduct) async {
+    firebase_storage.Reference storageReference = firebase_storage
+        .FirebaseStorage.instance
+        .ref()
+        .child('imagesProducts/$productUid');
 
     firebase_storage.UploadTask uploadTask =
         storageReference.putFile(imageProfile);
 
     await uploadTask.whenComplete(
-      () {
-        storageReference.getDownloadURL().then((url) {
+      () async {
+        await storageReference.getDownloadURL().then((url) {
           urlGetImage = url;
 
-          ProductModel _updatedProduct = ProductModel(
-            photoUrl: url,
-          );
+          updateProduct.photoUrl = url;
 
-          print(_updatedProduct.uid);
-          print(_updatedProduct.photoUrl);
-          // authController.updateProduct(_updatedProduct);
+          // productController.createProduct(updateProduct);
         });
       },
     );

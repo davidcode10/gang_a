@@ -8,7 +8,7 @@ class ProductModel {
   final String? description;
   final String? originalPrice;
   final String? realPrice;
-  final String? photoUrl;
+  String? photoUrl;
 
   ProductModel(
       {this.uid,

@@ -19,11 +19,6 @@ class EditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     GetImage getImage = GetImage();
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print(authController.pathImageUser.value);
-        },
-      ),
       body: Obx(
         () => ListView(
           children: [
@@ -178,9 +173,10 @@ class EditProfile extends StatelessWidget {
                   ),
                   onPressed: () async {
                     if (authController.pathImageUser.value != '') {
-                      getImage.uploadFileUser(
+                      await getImage.uploadFileUser(
                           context, File(authController.pathImageUser.value));
                     }
+                    Get.back();
                   },
                 ),
               ),
