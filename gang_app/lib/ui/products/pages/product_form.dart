@@ -192,7 +192,7 @@ class ProductForm extends StatelessWidget {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.blue[200])),
                       child: const Text(
-                        "ENVIAR DATOS",
+                        "SEND DATA",
                         style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
