@@ -6,7 +6,7 @@ import 'package:gang_app/global_widgets/global_textfield.dart';
 import 'package:gang_app/model/product_model.dart';
 import 'package:gang_app/services/firestore/firestore_service_products.dart';
 import 'package:gang_app/theme/color_theme.dart';
-import 'package:gang_app/ui/products/controllers/product_controller.dart';
+import 'package:gang_app/ui/products/controllers/product_edit_controller.dart';
 import 'package:gang_app/ui/utils/form_validator.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +15,10 @@ class ProductForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    ProductController productController = Get.find();
+    ProductEditController productController = Get.put(ProductEditController());
+
+    productController.dropdownValue.value =
+        productController.categoryProducts.first;
 
     GetImage getImage = GetImage();
     DataBaseProducts dataBaseProducts = DataBaseProducts();
@@ -234,14 +237,14 @@ class ProductForm extends StatelessWidget {
                         productController.productUid.value =
                             dataBaseProducts.generateIdProduct();
                         ProductModel newProduct = ProductModel(
-                          uid: productController.productUid.value,
-                          name: productController.nameProduct.text,
-                          description:
-                              productController.descriptionProduct.text,
-                          originalPrice:
-                              productController.originalPrice.text + "€",
-                          realPrice: productController.realPrice.text + "€",
-                        );
+                            uid: productController.productUid.value,
+                            name: productController.nameProduct.text,
+                            description:
+                                productController.descriptionProduct.text,
+                            originalPrice:
+                                productController.originalPrice.text + "€",
+                            realPrice: productController.realPrice.text + "€",
+                            category: productController.dropdownValue.value);
                         print(newProduct.uid);
                         print(newProduct.photoUrl);
 
@@ -252,9 +255,10 @@ class ProductForm extends StatelessWidget {
                             productController.productUid.value,
                             newProduct,
                           );
-
-                          productController.createProduct(newProduct);
                         }
+
+                        productController.createProduct(newProduct);
+                        Get.back();
 
                         // if (_formKey.currentState!.validate()) {
                         //   // ProductModel newProduct = ProductModel(

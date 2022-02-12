@@ -100,8 +100,7 @@ class EditProfile extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 width: double.infinity,
                 child: GlobalTextField(
-                  controller: authController.nameController
-                    ..text = authController.firestoreUser.value!.name!,
+                  controller: authController.nameController..text = 'Username',
                   obscureText: false,
                   hintText: "Tu nombre",
                   keyboardType: TextInputType.emailAddress,
@@ -173,8 +172,17 @@ class EditProfile extends StatelessWidget {
                   ),
                   onPressed: () async {
                     if (authController.pathImageUser.value != '') {
+                      UserModel _updatedUser = UserModel(
+                          uid: authController.firestoreUser.value!.uid,
+                          email: authController.firestoreUser.value!.email,
+                          name: authController.firestoreUser.value!.name,
+                          photoUrl:
+                              authController.firestoreUser.value!.photoUrl);
                       await getImage.uploadFileUser(
-                          context, File(authController.pathImageUser.value));
+                          context,
+                          File(authController.pathImageUser.value),
+                          _updatedUser);
+                      authController.updateUser(_updatedUser);
                     }
                     Get.back();
                   },

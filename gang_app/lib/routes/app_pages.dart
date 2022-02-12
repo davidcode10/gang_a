@@ -20,9 +20,7 @@ class AppPages {
     GetPage(
       name: Routes.HOME,
       page: () => HomeScreen(),
-      bindings: [
-        NavBinding(),
-      ],
+      bindings: [NavBinding(), ProductBinding()],
     ),
     GetPage(
       name: Routes.INTRO,

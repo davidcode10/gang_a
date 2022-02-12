@@ -5,7 +5,7 @@ part "user_model.g.dart";
 class UserModel {
   final String? uid;
   final String? name;
-  final String? photoUrl;
+  String? photoUrl;
   final String? email;
 
   UserModel(
