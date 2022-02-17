@@ -9,7 +9,7 @@ class ProductModel {
   final String? originalPrice;
   final String? realPrice;
   String? photoUrl;
-  String? category;
+  String? productCategory;
 
   ProductModel(
       {this.uid,
@@ -18,7 +18,7 @@ class ProductModel {
       this.originalPrice,
       this.realPrice,
       this.photoUrl,
-      this.category});
+      this.productCategory});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

@@ -7,6 +7,21 @@ class DataBaseProducts {
   static String _collection = "products";
   static FirestoreService _service = FirestoreService(_collection);
 
+  Stream<List<ProductModel>> productsCategoryStream() {
+    return _firestore
+        .collection(_collection)
+        .where('productCategory', isEqualTo: 'Man')
+        .snapshots()
+        .map((QuerySnapshot query) {
+      List<ProductModel> retVal = [];
+      for (var element in query.docs) {
+        retVal
+            .add(ProductModel.fromJson(element.data() as Map<String, dynamic>));
+      }
+      return retVal;
+    });
+  }
+
   Stream<List<ProductModel>> productsStream() {
     return _firestore
         .collection(_collection)
@@ -32,7 +47,7 @@ class DataBaseProducts {
         "photoUrl": product.photoUrl,
         "originalPrice": product.originalPrice,
         "realPrice": product.realPrice,
-        "productCategory": product.category
+        "productCategory": product.productCategory
 
         //   this.originalPrice,
         // this.realPrice,
@@ -40,7 +55,6 @@ class DataBaseProducts {
       });
       return true;
     } catch (e) {
-      print(e);
       return false;
     }
   }

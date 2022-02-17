@@ -4,6 +4,7 @@ import 'package:gang_app/ui/home/bindings/nav_binding.dart';
 import 'package:gang_app/ui/home/screens/home_screen.dart';
 import 'package:gang_app/ui/products/bindings/product_binging.dart';
 import 'package:gang_app/ui/products/pages/product_form.dart';
+import 'package:gang_app/ui/proof/bindings/product_proof_binding.dart';
 import 'package:get/route_manager.dart';
 
 part 'app_routes.dart';
@@ -20,7 +21,7 @@ class AppPages {
     GetPage(
       name: Routes.HOME,
       page: () => HomeScreen(),
-      bindings: [NavBinding(), ProductBinding()],
+      bindings: [NavBinding(), ProductBinding(), ProductProofBinding()],
     ),
     GetPage(
       name: Routes.INTRO,
