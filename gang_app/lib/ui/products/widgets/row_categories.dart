@@ -20,6 +20,8 @@ class RowCategories extends StatelessWidget {
             onPressed: () async {
               productController.productsCategoryList.value =
                   await productController.categorySelected(categories[index]);
+              productController.updateSearchQuery(
+                  productController.searchQueryController.text);
             },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.green[300])),

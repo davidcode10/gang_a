@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gang_app/ui/proof/controllers/product_proof_controller.dart';
 import 'package:get/get.dart';
 
-class BuildActionsSearch extends StatelessWidget {
-  const BuildActionsSearch({Key? key}) : super(key: key);
+class BuildActionsSearchProof extends StatelessWidget {
+  const BuildActionsSearchProof({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

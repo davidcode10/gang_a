@@ -31,16 +31,17 @@ class HomeScreen extends StatelessWidget {
     // AuthController authController = Get.find();
     return Obx(
       () => Scaffold(
-        appBar: (navController.index.value != 1)
-            ? AppBar(
-                leading: IconButton(
-                  icon: Icon(Icons.menu),
-                  onPressed: () {
-                    Navigator.of(context).push(OverlayAnimation());
-                  },
-                ),
-              )
-            : null,
+        appBar:
+            (navController.index.value != 1 && navController.index.value != 2)
+                ? AppBar(
+                    leading: IconButton(
+                      icon: Icon(Icons.menu),
+                      onPressed: () {
+                        Navigator.of(context).push(OverlayAnimation());
+                      },
+                    ),
+                  )
+                : null,
         bottomNavigationBar: CustomNavigationBar(
           selectedIndex: navController.index.value,
           onIndexChanged: (i) {

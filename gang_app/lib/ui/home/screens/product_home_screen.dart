@@ -6,7 +6,9 @@ import 'package:gang_app/ui/home/widgets/product_image.dart';
 import 'package:gang_app/ui/products/controllers/product_controller.dart';
 import 'package:gang_app/ui/products/controllers/product_edit_controller.dart';
 import 'package:gang_app/ui/products/pages/product_details.dart';
+import 'package:gang_app/ui/products/widgets/build_actions_search.dart';
 import 'package:gang_app/ui/products/widgets/row_categories.dart';
+import 'package:gang_app/ui/products/widgets/text_search_field.dart';
 import 'package:get/get.dart';
 
 class ProductHomeScreen extends StatelessWidget {
@@ -15,7 +17,15 @@ class ProductHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductController productController = Get.find();
-    return Scaffold(
+    return Obx(() => Scaffold(
+        appBar: AppBar(
+          leading:
+              productController.isSearching.value ? BackButton() : Container(),
+          title: productController.isSearching.value
+              ? TextSearchField()
+              : Text('Title'),
+          actions: [BuildActionsSearch()],
+        ),
         backgroundColor: Colors.green,
         floatingActionButton: FloatingActionButton(
           child: Icon(
@@ -24,31 +34,39 @@ class ProductHomeScreen extends StatelessWidget {
             size: 40.0,
           ),
           onPressed: () {
+            productController.addProducts.value.clear();
             Get.toNamed(Routes.PRODUCTFORM);
           },
         ),
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Stack(children: [
-              Container(
+              SizedBox(
                 height: 30,
                 child: RowCategories(
                   categories: productController.categoryProducts,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Padding(
-                  padding: EdgeInsets.only(top: 50),
+                  padding: const EdgeInsets.only(top: 50),
                   child: Obx(() => (productController
-                          .productsCategoryList.value.isEmpty)
-                      ? GridCardProduct(
-                          listProduct: productController.productsList.value,
-                        )
+                              .addProducts.value.isEmpty &&
+                          (productController.isSearching.value == false ||
+                              productController.searchQueryController.text ==
+                                  ''))
+                      ? (productController
+                              .productsCategoryList.value.isNotEmpty)
+                          ? GridCardProduct(
+                              listProduct:
+                                  productController.productsCategoryList.value)
+                          : GridCardProduct(
+                              listProduct: productController.productsList.value)
                       : GridCardProduct(
-                          listProduct:
-                              productController.productsCategoryList.value)))
-            ])));
+                          listProduct: productController.addProducts.value,
+                        )))
+            ]))));
   }
 }
