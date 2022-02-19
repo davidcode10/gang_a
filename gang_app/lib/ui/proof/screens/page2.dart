@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gang_app/routes/app_pages.dart';
 import 'package:gang_app/ui/proof/controllers/product_proof_controller.dart';
 import 'package:gang_app/ui/proof/widgets/build_actions_search_proof.dart';
 import 'package:gang_app/ui/proof/widgets/text_search_field_proof.dart';
@@ -14,6 +15,9 @@ class Page2 extends StatelessWidget {
     ProductProofController productProofController = Get.find();
     return Obx(
       () => Scaffold(
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          Get.toNamed(Routes.CHAT);
+        }),
         appBar: AppBar(
           leading: productProofController.isSearching.value
               ? BackButton()
@@ -36,18 +40,18 @@ class Page2 extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            (productProofController.addPalabras.value.isNotEmpty)
-                ? ListView.builder(
-                    itemCount: productProofController.addPalabras.value.length,
-                    itemBuilder: (context, index) {
-                      return Text(
-                          productProofController.addPalabras.value[index]);
-                    })
-                : ListView.builder(
-                    itemCount: productProofController.palabras.value.length,
-                    itemBuilder: (context, index) {
-                      return Text(productProofController.palabras.value[index]);
-                    }),
+            // (productProofController.addPalabras.value.isNotEmpty)
+            //     ? ListView.builder(
+            //         itemCount: productProofController.addPalabras.value.length,
+            //         itemBuilder: (context, index) {
+            //           return Text(
+            //               productProofController.addPalabras.value[index]);
+            //         })
+            //     : ListView.builder(
+            //         itemCount: productProofController.palabras.value.length,
+            //         itemBuilder: (context, index) {
+            //           return Text(productProofController.palabras.value[index]);
+            //         }),
           ],
         ),
       ),

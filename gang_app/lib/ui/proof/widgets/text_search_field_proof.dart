@@ -15,7 +15,7 @@ class TextSearchFieldProof extends StatelessWidget {
           hintText: "Search Data....",
           border: InputBorder.none,
           hintStyle: TextStyle(color: Colors.white30)),
-      style: TextStyle(color: Colors.white, fontSize: 16.0),
+      style: TextStyle(color: Colors.white, fontSize: 16),
       onChanged: (query) => productProofController.updateSearchQuery(query),
     );
   }
