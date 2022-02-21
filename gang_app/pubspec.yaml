@@ -53,6 +53,7 @@ dependencies:
   flutter_native_splash: ^2.0.1+1
   url_launcher: ^6.0.20
   webview_flutter: ^3.0.0
+  youtube_player_flutter: ^8.0.0
 
 dev_dependencies:
   flutter_test:
