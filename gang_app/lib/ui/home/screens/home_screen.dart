@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gang_app/global_widgets/animations/overlay_animation.dart';
 import 'package:gang_app/global_widgets/navigation/custom_navigation_bar.dart';
 import 'package:gang_app/ui/auth/controller/auth_controller.dart';
+import 'package:gang_app/ui/chat/screens/rooms_chat_screen.dart';
 import 'package:gang_app/ui/home/controllers/nav_controller.dart';
 import 'package:gang_app/ui/home/screens/product_home_screen.dart';
 import 'package:gang_app/ui/products/controllers/product_controller.dart';
 import 'package:gang_app/ui/profile/screens/profile_screen.dart';
 import 'package:gang_app/ui/proof/controllers/product_proof_controller.dart';
 import 'package:gang_app/ui/proof/screens/page1.dart';
-import 'package:gang_app/ui/proof/screens/page2.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
     ProductProofController productProofController = Get.find();
     var screens = [
       Page1(),
-      Page2(),
+      RoomsChatScreen(),
       ProductHomeScreen(),
       ProfileScreen(),
     ];
@@ -31,17 +31,16 @@ class HomeScreen extends StatelessWidget {
     // AuthController authController = Get.find();
     return Obx(
       () => Scaffold(
-        appBar:
-            (navController.index.value != 1 && navController.index.value != 2)
-                ? AppBar(
-                    leading: IconButton(
-                      icon: Icon(Icons.menu),
-                      onPressed: () {
-                        Navigator.of(context).push(OverlayAnimation());
-                      },
-                    ),
-                  )
-                : null,
+        appBar: (navController.index.value != 2)
+            ? AppBar(
+                leading: IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () {
+                    Navigator.of(context).push(OverlayAnimation());
+                  },
+                ),
+              )
+            : null,
         bottomNavigationBar: CustomNavigationBar(
           selectedIndex: navController.index.value,
           onIndexChanged: (i) {

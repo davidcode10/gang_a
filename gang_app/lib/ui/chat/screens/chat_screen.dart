@@ -17,7 +17,7 @@ class ChatScreen extends StatelessWidget {
             heroTag: 'Others',
             onPressed: () {
               messageController.chargeM.value++;
-              DatabaseMessages().chatMessageStrem(
+              DatabaseMessages().chatMessageStream(
                   Get.parameters['roomId']!, messageController.chargeM.value);
             }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,

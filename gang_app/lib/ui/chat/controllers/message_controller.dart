@@ -7,7 +7,7 @@ List<String> roomsChats = ['General', 'Sports', 'Cinema', 'Music'];
 
 class MessageController extends GetxController {
   TextEditingController msgController = TextEditingController();
-  Rx<String> message = "".obs;
+  Rx<String> message = ''.obs;
   Rx<int> chargeM = 0.obs;
   Rx<List<MessageModel>> messagesList = Rx<List<MessageModel>>([]);
   List<MessageModel> get messages => messagesList.value.obs;
@@ -16,8 +16,10 @@ class MessageController extends GetxController {
 
   @override
   void onReady() {
-    messagesList.bindStream(DatabaseMessages()
-        .chatMessageStrem(Get.parameters['roomId']!, chargeM.value));
+    messagesList.bindStream(DatabaseMessages().chatMessageStream(
+      Get.parameters['roomId']!,
+      chargeM.value,
+    ));
     super.onReady();
   }
 

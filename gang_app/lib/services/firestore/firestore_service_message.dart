@@ -21,7 +21,7 @@ class DatabaseMessages {
     });
   }
 
-  Stream<List<MessageModel>> chatMessageStrem(String roomId, int index) {
+  Stream<List<MessageModel>> chatMessageStream(String roomId, int index) {
     return _firestore
         .collection(_collection)
         .where("roomId", isEqualTo: roomId)
