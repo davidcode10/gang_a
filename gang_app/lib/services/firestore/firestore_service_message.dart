@@ -26,7 +26,7 @@ class DatabaseMessages {
         .collection(_collection)
         .where("roomId", isEqualTo: roomId)
         .orderBy("timestamp", descending: true)
-        .limit(1 + index)
+        .limitToLast(1 + index)
         .snapshots()
         .map((QuerySnapshot query) {
       List<MessageModel> retVal = [];

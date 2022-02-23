@@ -6,4 +6,5 @@ abstract class Routes {
   static const LOADING = '/loading';
   static const PRODUCTFORM = '/productForm';
   static const CHAT = '/chat/:roomId';
+  static const VIDEOSFORM = '/videosForm';
 }

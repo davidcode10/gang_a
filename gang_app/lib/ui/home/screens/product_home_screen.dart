@@ -28,13 +28,12 @@ class ProductHomeScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.green,
         floatingActionButton: FloatingActionButton(
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: AppColors.white,
             size: 40.0,
           ),
           onPressed: () {
-            productController.addProducts.value.clear();
             Get.toNamed(Routes.PRODUCTFORM);
           },
         ),
@@ -65,8 +64,7 @@ class ProductHomeScreen extends StatelessWidget {
                           : GridCardProduct(
                               listProduct: productController.productsList.value)
                       : GridCardProduct(
-                          listProduct: productController.addProducts.value,
-                        )))
+                          listProduct: productController.addProducts.value)))
             ]))));
   }
 }

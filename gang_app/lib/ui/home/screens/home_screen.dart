@@ -8,7 +8,7 @@ import 'package:gang_app/ui/home/screens/product_home_screen.dart';
 import 'package:gang_app/ui/products/controllers/product_controller.dart';
 import 'package:gang_app/ui/profile/screens/profile_screen.dart';
 import 'package:gang_app/ui/proof/controllers/product_proof_controller.dart';
-import 'package:gang_app/ui/proof/screens/page1.dart';
+import 'package:gang_app/ui/videos/screens/videos_screen.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
     ProductController productController = Get.find();
     ProductProofController productProofController = Get.find();
     var screens = [
-      Page1(),
+      VideosScreen(),
       RoomsChatScreen(),
       ProductHomeScreen(),
       ProfileScreen(),
@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
           onIndexChanged: (i) {
             navController.index.value = i;
             if (i != 2) {
-              productController.productsList.value.clear();
+              productController.productsCategoryList.value.clear();
             }
             if (i != 1) {
               productProofController.searchQueryController.clear();
