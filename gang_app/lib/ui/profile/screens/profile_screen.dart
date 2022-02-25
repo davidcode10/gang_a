@@ -13,10 +13,21 @@ class ProfileScreen extends StatelessWidget {
     AuthController authController = Get.find();
 
     return Scaffold(
-      body: (authController.firestoreUser.value != null)
-          ? Obx(
-              () => SingleChildScrollView(
-                child: Column(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.arrow_back,
+          size: 30,
+        ),
+        backgroundColor: Colors.green[200],
+        onPressed: () {
+          Get.back();
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      body: Obx(
+        () => SingleChildScrollView(
+          child: (authController.firestoreUser.value != null)
+              ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (authController.firestoreUser.value!.photoUrl != null)
@@ -36,12 +47,12 @@ class ProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50),
                         ),
                       ),
-                    if (authController.firestoreUser.value != null)
+                    if (authController.firestoreUser.value!.name != null)
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 40.0),
                           child: Text(
-                            authController.firestoreUser.value!.name ?? '',
+                            authController.firestoreUser.value!.name!,
                             style: textTheme.headline6,
                           ),
                         ),
@@ -119,10 +130,10 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              ),
-            )
-          : Container(),
+                )
+              : Container(),
+        ),
+      ),
     );
   }
 }
